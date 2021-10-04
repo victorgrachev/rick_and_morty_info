@@ -24,13 +24,13 @@ function Navbar() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <NavLink className="nav-link" to="/" exact>
-              <i class="bx bxs-home bx-sm"></i>
+              <i className="bx bxs-home bx-sm"></i>
               <span style={styleSpan}>Главная</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/series">
-              <i class="bx bx-list-ul bx-sm"></i>
+              <i className="bx bx-list-ul bx-sm"></i>
               <span style={styleSpan}>Список серий</span>
             </NavLink>
           </li>
