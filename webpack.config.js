@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
@@ -8,6 +9,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const port = process.env.PORT ?? 8000;
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
+
+const env = Object.keys(process.env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(process.env[next]);
+  return prev;
+}, {});
 
 const optimization = () => {
   const config = {
@@ -48,6 +54,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].[hash].css' }),
+    new webpack.DefinePlugin(env),
   ],
   module: {
     rules: [
@@ -63,7 +70,6 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env', '@babel/preset-react'],
-              plugins: ['@babel/plugin-proposal-class-properties'],
             },
           },
         ],
