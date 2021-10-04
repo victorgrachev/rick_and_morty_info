@@ -76,6 +76,7 @@ module.exports = {
     },
     port: port,
     hot: 'only',
+    historyApiFallback: true,
   },
   devtool: isDev ? 'source-map' : false,
   optimization: optimization(),
