@@ -28,7 +28,7 @@ const optimization = () => {
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src', 'entry', 'index.js'),
+    main: path.join(__dirname, 'src', 'index.js'),
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -54,6 +54,19 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+              plugins: ['@babel/plugin-proposal-class-properties'],
+            },
+          },
+        ],
       },
     ],
   },
