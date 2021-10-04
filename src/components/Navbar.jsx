@@ -19,6 +19,7 @@ function Navbar() {
       <div className="container-fluid">
         <div className="navbar-brand">
           <i className="bx bxl-react bx-burst bx-sm"></i>
+          <span style={styleSpan}>Rick and Morty</span>
         </div>
 
         <ul className="navbar-nav">
