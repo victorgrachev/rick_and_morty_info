@@ -1,0 +1,19 @@
+{
+  "name": "rick_and_morty_info",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorgrachev/rick_and_morty_info.git"
+  },
+  "author": "vgrachev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorgrachev/rick_and_morty_info/issues"
+  },
+  "homepage": "https://github.com/victorgrachev/rick_and_morty_info#readme"
+}
