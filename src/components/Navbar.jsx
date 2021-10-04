@@ -9,7 +9,7 @@ function Navbar() {
   const styleSpan = {
     position: 'relative',
     bottom: '5px',
-    paddingLeft: '5px',
+    left: '5px',
   };
   return (
     <nav
