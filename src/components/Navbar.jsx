@@ -13,10 +13,10 @@ function Navbar() {
   };
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light sticky-top"
+      className="navbar navbar-expand-lg navbar-light bg-light"
       style={styleNavbar}
     >
-      <div className="container-fluid">
+      <div className="container-fluid justify-content-start">
         <div className="navbar-brand">
           <i className="bx bxl-react bx-burst bx-sm"></i>
           <span style={styleSpan}>Rick and Morty</span>
