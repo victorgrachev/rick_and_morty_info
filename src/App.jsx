@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Home from './pages/Home.jsx';
 import Series from './pages/Series.jsx';
+import Episode from './pages/Episode.jsx';
+import SerialInfoState from './context/SerialInfoState.jsx';
 
 function App() {
   return (
@@ -16,7 +18,10 @@ function App() {
         >
           <Switch>
             <Route path={'/'} exact component={Home} />
-            <Route path={'/series'} component={Series} />
+            <SerialInfoState>
+              <Route path={'/episode/:episodeIndex'} component={Episode} />
+              <Route path={'/series'} component={Series} />
+            </SerialInfoState>
           </Switch>
         </div>
       </div>
