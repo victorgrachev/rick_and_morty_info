@@ -71,6 +71,23 @@ function SerialInfoState({ children }) {
     dispatch({ type: CLEAN_INFO_CHARACTER });
   };
 
+  const searchSeries = (name) => {
+    const payload = [];
+
+    if (name) {
+      state.seasons.forEach((season) => {
+        season.series.forEach((value) => {
+          const regExp = new RegExp('.*' + name.toUpperCase() + '.*');
+          if (regExp.test(value.name.toUpperCase())) {
+            payload.push(value);
+          }
+        });
+      });
+    }
+
+    dispatch({ type: SELECT_SEASON, payload });
+  };
+
   const value = {
     seasons: state.seasons,
     loading: state.loading,
@@ -80,6 +97,7 @@ function SerialInfoState({ children }) {
     selectSeason,
     getInfoCharacter,
     cleanInfoCharacter,
+    searchSeries,
   };
   return (
     <SerialInfoContext.Provider value={value}>
