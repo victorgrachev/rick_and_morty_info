@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Home from './pages/Home.jsx';
 import Series from './pages/Series.jsx';
@@ -9,7 +9,7 @@ import SerialInfoState from './context/SerialInfoState.jsx';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="d-flex flex-column h-100">
         <Navbar />
         <div
@@ -25,7 +25,7 @@ function App() {
           </Switch>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
