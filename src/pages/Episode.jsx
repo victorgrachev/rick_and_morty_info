@@ -25,16 +25,16 @@ function Episode() {
         <p>{`Название эпизода: ${selectSeries[episodeIndex].name}`}</p>
       </div>
       <div className="card-body">
-        <blockquote className="blockquote mb-0">
+        <blockquote className="blockquote w-100 mb-0">
           <p>Информация о персонажах:</p>
           {infoCharacter.length === 0 ? (
             <Loader />
           ) : (
-            <div className="d-flex justify-content-start flex-wrap">
+            <div className="d-flex justify-content-around flex-wrap flex-grow">
               {infoCharacter.map((character, indx) => (
                 <blockquote
                   className="blockquote p-2"
-                  style={{ flexBasis: '20%' }}
+                  style={{ flexBasis: '10%' }}
                   key={indx}
                 >
                   <img src={character.image} />
