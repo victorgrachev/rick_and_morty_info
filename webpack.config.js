@@ -1,75 +1,50 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserWebpackPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const port = process.env.PORT ?? 8000;
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === "development";
 const isProd = !isDev;
-
-const env = Object.keys(process.env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(process.env[next]);
-  return prev;
-}, {});
-
-const optimization = () => {
-  const config = {
-    splitChunks: {
-      chunks: 'all',
-    },
-  };
-
-  if (isProd) {
-    config.minimizer = [
-      new TerserWebpackPlugin(),
-      new OptimizeCssAssetPlugin(),
-    ];
-  }
-
-  return config;
-};
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src', 'index.js'),
+    main: path.join(__dirname, "src", "index.js"),
   },
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: '[name].[hash].js',
-  },
-  resolve: {
-    alias: {
-      '@module': path.join(__dirname, 'src', 'module'),
-    },
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[hash].js",
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, "src", "index.html"),
       minify: {
         collapseWhitespace: isProd,
       },
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].[hash].css' }),
-    new webpack.DefinePlugin(env),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    useBuiltIns: "usage",
+                    corejs: "3.22",
+                  },
+                ],
+                "@babel/preset-react",
+              ],
             },
           },
         ],
@@ -78,12 +53,11 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, "dist"),
     },
     port: port,
-    hot: 'only',
+    hot: "only",
     historyApiFallback: true,
   },
-  devtool: isDev ? 'source-map' : false,
-  optimization: optimization(),
+  devtool: isDev ? "source-map" : false,
 };
